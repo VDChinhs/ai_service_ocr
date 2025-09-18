@@ -1,0 +1,9 @@
+fastapi[standard]
+uvicorn[standard]
+pydantic-settings
+pika
+aio-pika
+gdown
+--extra-index-url https://www.paddlepaddle.org.cn/packages/stable/cu118/
+paddlepaddle-gpu==3.1.1
+paddleocr
