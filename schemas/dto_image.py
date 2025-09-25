@@ -6,5 +6,5 @@ class ImageBase64Input(BaseModel):
         0.1, description="Confidence threshold for text detection"
     )
     text_rec_score_thresh: float = Field(
-        0.8, description="Confidence threshold for text recognition"
+        0.85, description="Confidence threshold for text recognition"
     )
