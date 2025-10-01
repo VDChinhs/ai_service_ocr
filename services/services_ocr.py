@@ -6,10 +6,12 @@ from fastapi import Request
 from schemas.dto_image import ImageBase64Input
 
 import numpy as np
+import time
 
 
 def infer_image_from_base64(payload: ImageBase64Input, request: Request):
     try:
+        start_time = time.perf_counter()
         image_data = base64.b64decode(payload.image_base64)
         image = Image.open(io.BytesIO(image_data)).convert("RGB")
         image_np = np.array(image)
@@ -24,6 +26,12 @@ def infer_image_from_base64(payload: ImageBase64Input, request: Request):
             obj["rec_texts"] = res.get("rec_texts")
             obj["rec_boxes"] = res.get("rec_boxes")
             obj["rec_scores"] = res.get("rec_scores")
+        
+        end_time = time.perf_counter()
+        inference_time = round(end_time - start_time, 4) 
+        print("inference_time: ", inference_time)
+        obj["inference_time"] = inference_time
+
         return obj
     except:
         return None
